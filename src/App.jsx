@@ -21,4 +21,22 @@ export default function Board() {
       <div className="board-row">
         <Square value={squares[6]} />
         <Square value={squares[7]} />
-        <Square v
+        <Square value={squares[8]} />
+      </div>
+    </>
+  );
+}
+
+function Square({ value, onSquareClick }) {
+  // const [value, setvalue] = useState(null);
+
+  // function handleClick() {
+  //   setvalue("X");
+  // }
+
+  return (
+    <button className="square" onClick={onSquareClick}>
+      {value}
+    </button>
+  );
+}
