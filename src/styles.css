@@ -92,5 +92,20 @@ body {
 #root {
   display: grid;
   place-content: center;
-  height: 85vh;
+  height: 90vh;
+  justify-items: center;
+}
+
+.movesdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1%;
+  padding: 10px;
+  width: 100%;
+}
+
+.board_moves_container {
+  display: flex;
+  gap: 1%;
 }
