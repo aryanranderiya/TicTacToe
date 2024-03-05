@@ -85,7 +85,7 @@ export default function Game() {
         <br></br>
         <div className="status">{status}</div>
         <div className="Board">{elements}</div>
-        {/!*TODO implement this !! */}
+        {/* Implement this! */}
         <button value={"test"} disabled={!isRestartButtonDisabled}>
           Restart Game
         </button>
