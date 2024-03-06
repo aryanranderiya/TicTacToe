@@ -26,10 +26,10 @@ function setColour(
         square_element = document.querySelector(
           `#square_${index}[value="${winner}"]`
         );
-        colour = "#69ffb4";
+        colour = "#00ff1a";
       } else {
         square_element = document.querySelector(`#square_${index}`);
-        colour = "transparent";
+        colour = "black";
       }
 
       if (square_element) square_element.style.backgroundColor = colour;
@@ -39,7 +39,6 @@ function setColour(
 
 export default function Game() {
   let filledsquares = null;
-  const [isRestartButtonDisabled, setRestartButtonDisabled] = useState(false);
 
   function Board({ xIsNext, squares, onPlay }) {
     var values = calculateWinner(squares);
@@ -66,46 +65,63 @@ export default function Game() {
       setColour();
     }
 
-    var elements = [];
-    for (let i = 0; i < 9; i++) {
-      if (i % 3 == 0) elements.push(<div className="board-row"></div>);
+    let elements1 = [],
+      elements2 = [],
+      elements3 = [];
 
-      elements.push(
+    for (let i = 0; i < 3; i++) {
+      elements1.push(
         <Square
+          key={i}
           id={i}
           value={squares[i]}
           onSquareClick={() => handleClick(i)}
+          className="Board"
+        />
+      );
+    }
+    for (let i = 3; i < 6; i++) {
+      elements2.push(
+        <Square
+          key={i}
+          id={i}
+          value={squares[i]}
+          onSquareClick={() => handleClick(i)}
+          className="Board"
+        />
+      );
+    }
+    for (let i = 6; i < 9; i++) {
+      elements3.push(
+        <Square
+          key={i}
+          id={i}
+          value={squares[i]}
+          onSquareClick={() => handleClick(i)}
+          className="Board"
         />
       );
     }
 
     return (
-      <>
-        <h1>Tic-Tac-Toe</h1>
+      <div className="main_board">
         <br></br>
         <div className="status">{status}</div>
-        <div className="Board">{elements}</div>
+
+        <div className="board-row">{elements1}</div>
+        <div className="board-row">{elements2}</div>
+        <div className="board-row">{elements3}</div>
+
         {/* Implement this! */}
-        <button value={"test"} disabled={!isRestartButtonDisabled}>
+        <button
+          onClick={() => {
+            window.location.reload();
+          }}
+        >
           Restart Game
         </button>
-      </>
+      </div>
     );
-  }
-
-  function restartButton(currentSquares, setRestartButtonDisabled) {
-    const filledsquares = currentSquares.filter(Boolean);
-    let length = filledsquares.length;
-
-    console.log("currentSquares", currentSquares);
-    console.log("filled", filledsquares);
-    console.log("length", length);
-
-    if (length > 0) {
-      setRestartButtonDisabled(true);
-    } else {
-      setRestartButtonDisabled(false);
-    }
   }
 
   const [history, setHistory] = useState([Array(9).fill(null)]);
@@ -114,7 +130,6 @@ export default function Game() {
   const currentSquares = history[currentMove];
 
   function handlePlay(nextSquares) {
-    restartButton(currentSquares, setRestartButtonDisabled);
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
@@ -123,7 +138,6 @@ export default function Game() {
   }
 
   function jumpTo(nextMove) {
-    restartButton(currentSquares, setRestartButtonDisabled);
     setCurrentMove(nextMove);
   }
 
@@ -136,14 +150,9 @@ export default function Game() {
 
   return (
     <>
+      <h1 className="title">Tic-Tac-Toe</h1>
       <div className="board_moves_container">
-        <div style={{ width: "100%" }}>
-          <Board
-            xIsNext={xIsNext}
-            squares={currentSquares}
-            onPlay={handlePlay}
-          />
-        </div>
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
         <div className="movesdiv">{moves}</div>
       </div>
     </>
