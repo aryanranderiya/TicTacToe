@@ -1,4 +1,6 @@
 # Tic-Tac-Toe
+A simple Web Application version of the classic Tic Tac Toe game built using React.js <br>
+### [Play Here](http://projects.aryanranderiya.com/TicTacToe-React/)
 
 ## Screenshots
 
